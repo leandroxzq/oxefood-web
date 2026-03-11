@@ -1,41 +1,40 @@
-import { Link } from 'react-router-dom';
-import { Container, Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
+import { Container, Menu } from 'semantic-ui-react'
 
 export default function MenuSistema(props) {
+    return (
+        <Menu inverted color="orange" size="large">
+            <Container>
+                <Menu.Item
+                    as={Link}
+                    to="/"
+                    header
+                    active={props.tela === 'home'}
+                >
+                    OxeFood
+                </Menu.Item>
 
-  return (
-    <Menu inverted color='orange' size='large'>
-      <Container>
-        <Menu.Item
-          as={Link}
-          to='/'
-          header
-          active={props.tela === 'home'}
-        >
-          OxeFood
-        </Menu.Item>
+                <Menu.Item
+                    name="cliente"
+                    active={props.tela === 'cliente'}
+                    as={Link}
+                    to="/list-cliente"
+                />
 
-        <Menu.Item
-          name='cliente'
-          active={props.tela === 'cliente'}
-          as={Link}
-          to='/list-cliente'
-        />
+                <Menu.Item
+                    name="produto"
+                    active={props.tela === 'produto'}
+                    as={Link}
+                    to="/list-produto"
+                />
 
-        <Menu.Item
-          name='produto'
-          active={props.tela === 'produto'}
-          as={Link}
-          to='/form-produto'
-        />
-
-        <Menu.Item
-          name='entregador'
-          active={props.tela === 'entregador'}
-          as={Link}
-          to='/form-entregador'
-        />
-      </Container>
-    </Menu>
-  );
+                <Menu.Item
+                    name="entregador"
+                    active={props.tela === 'entregador'}
+                    as={Link}
+                    to="/list-entregador"
+                />
+            </Container>
+        </Menu>
+    )
 }

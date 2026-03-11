@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react'
 import MenuSistema from '../../MenuSistema'
 
-export default function ListCliente() {
+export default function ListProduto() {
     const [lista, setLista] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [idRemover, setIdRemover] = useState()
@@ -27,34 +27,25 @@ export default function ListCliente() {
     }, [])
 
     function carregarLista() {
-        axios.get('http://localhost:8080/api/cliente').then((response) => {
+        axios.get('http://localhost:8080/api/produto').then((response) => {
             setLista(response.data)
         })
     }
 
-    function formatarData(dataParam) {
-        if (dataParam === null || dataParam === '' || dataParam === undefined) {
-            return ''
-        }
-
-        let arrayData = dataParam.split('-')
-        return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0]
-    }
-
     async function remover() {
         await axios
-            .delete('http://localhost:8080/api/cliente/' + idRemover)
+            .delete('http://localhost:8080/api/produto/' + idRemover)
             .then((response) => {
-                console.log('Cliente removido com sucesso.')
+                console.log('Produto removido com sucesso.')
 
                 axios
-                    .get('http://localhost:8080/api/cliente')
+                    .get('http://localhost:8080/api/produto')
                     .then((response) => {
                         setLista(response.data)
                     })
             })
             .catch((error) => {
-                console.log('Erro ao remover um cliente.')
+                console.log('Erro ao remover um produto.')
             })
         setOpenModal(false)
     }
@@ -89,11 +80,11 @@ export default function ListCliente() {
                 </Modal.Actions>
             </Modal>
 
-            <MenuSistema tela={'cliente'} />
+            <MenuSistema tela={'produto'} />
 
             <div style={{ marginTop: '3%' }}>
                 <Container textAlign="justified">
-                    <h2> Cliente </h2>
+                    <h2> Produto </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
@@ -104,7 +95,7 @@ export default function ListCliente() {
                             icon="clipboard outline"
                             floated="right"
                             as={Link}
-                            to="/form-cliente"
+                            to="/form-produto"
                         />
 
                         <br />
@@ -114,50 +105,58 @@ export default function ListCliente() {
                         <Table color="orange" sortable celled>
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>Nome</Table.HeaderCell>
-                                    <Table.HeaderCell>CPF</Table.HeaderCell>
+                                    <Table.HeaderCell>Codigo</Table.HeaderCell>
+                                    <Table.HeaderCell>Titulo</Table.HeaderCell>
                                     <Table.HeaderCell>
-                                        Data de Nascimento
+                                        Descricao
                                     </Table.HeaderCell>
                                     <Table.HeaderCell>
-                                        Fone Celular
+                                        Valor Unitario
                                     </Table.HeaderCell>
                                     <Table.HeaderCell>
-                                        Fone Fixo
+                                        Tempo Minimo
+                                    </Table.HeaderCell>
+                                    <Table.HeaderCell>
+                                        Tempo Maximo
                                     </Table.HeaderCell>
                                     <Table.HeaderCell textAlign="center">
-                                        Ações
+                                        Acoes
                                     </Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
 
                             <Table.Body>
-                                {lista.map((cliente) => (
-                                    <Table.Row key={cliente.id}>
-                                        <Table.Cell>{cliente.nome}</Table.Cell>
-                                        <Table.Cell>{cliente.cpf}</Table.Cell>
+                                {lista.map((produto) => (
+                                    <Table.Row key={produto.id}>
                                         <Table.Cell>
-                                            {formatarData(
-                                                cliente.dataNascimento
-                                            )}
+                                            {produto.codigo}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            {cliente.foneCelular}
+                                            {produto.titulo}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            {cliente.foneFixo}
+                                            {produto.descricao}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            {produto.valorUnitario}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            {produto.tempoEntregaMinimo}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            {produto.tempoEntregaMaximo}
                                         </Table.Cell>
                                         <Table.Cell textAlign="center">
                                             <Button
                                                 inverted
                                                 circular
                                                 color="green"
-                                                title="Clique aqui para editar os dados deste cliente"
+                                                title="Clique aqui para editar os dados deste produto"
                                                 icon
                                             >
                                                 <Link
-                                                    to="/form-cliente"
-                                                    state={{ id: cliente.id }}
+                                                    to="/form-produto"
+                                                    state={{ id: produto.id }}
                                                     style={{ color: 'green' }}
                                                 >
                                                     {' '}
@@ -169,10 +168,10 @@ export default function ListCliente() {
                                                 inverted
                                                 circular
                                                 color="red"
-                                                title="Clique aqui para remover este cliente"
+                                                title="Clique aqui para remover este produto"
                                                 icon
                                                 onClick={(e) =>
-                                                    confirmaRemover(cliente.id)
+                                                    confirmaRemover(produto.id)
                                                 }
                                             >
                                                 <Icon name="trash" />
