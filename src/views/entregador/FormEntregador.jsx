@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import InputMask from 'react-input-mask';
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import MenuSistema from '../../MenuSistema';
 
 export default function FormEntregador () {
 
-    const navigate = useNavigate();
     const [nome, setNome] = useState();
     const [cpf, setCpf] = useState();
     const [rg, setRg] = useState();
@@ -37,6 +37,7 @@ export default function FormEntregador () {
     return (
 
         <div>
+            <MenuSistema tela={'entregador'} />
 
             <div style={{marginTop: '3%'}}>
 
@@ -123,18 +124,19 @@ export default function FormEntregador () {
                         
                         <div style={{marginTop: '4%'}}>
 
-                            <Button
-                                type="button"
-                                inverted
-                                circular
-                                icon
-                                labelPosition='left'
-                                color='orange'
-                                onClick={() => navigate('/')}
-                            >
-                                <Icon name='reply' />
-                                Voltar
-                            </Button>
+                            <Link to={'/'}>
+                                <Button
+                                    type="button"
+                                    inverted
+                                    circular
+                                    icon
+                                    labelPosition='left'
+                                    color='orange'
+                                >
+                                    <Icon name='reply' />
+                                    Voltar
+                                </Button>
+                            </Link>
                                 
                             <Button
                                 inverted
