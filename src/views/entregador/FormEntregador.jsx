@@ -62,15 +62,16 @@ export default function FormEntregador () {
                                     onChange={e => setNome(e.target.value)}
                                 />
 
-                                <Form.Input
-                                    required
-                                    fluid
-                                    label='CPF'
-                                    as={InputMask}
-                                    mask="999.999.999-99"
-                                    value={cpf}
-                                    onChange={e => setCpf(e.target.value)}
-                                />
+                                <Form.Field required width={8}>
+                                    <label>CPF</label>
+                                    <InputMask
+                                        mask="999.999.999-99"
+                                        value={cpf || ''}
+                                        onChange={e => setCpf(e.target.value)}
+                                    >
+                                        {() => <input />}
+                                    </InputMask>
+                                </Form.Field>
 
                             </Form.Group>
   
@@ -83,40 +84,44 @@ export default function FormEntregador () {
                                     onChange={e => setRg(e.target.value)}
                                 />
 
-                                <Form.Input
-                                    fluid
-                                    label='Data Nascimento'
-                                    as={InputMask}
-                                    mask="99/99/9999"
-                                    maskChar={null}
-                                    placeholder="Ex: 20/03/1985"
-                                    value={dataNascimento}
-                                    onChange={e => setDataNascimento(e.target.value)}
-                                />
+                                <Form.Field width={8}>
+                                    <label>Data Nascimento</label>
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        maskChar={null}
+                                        placeholder="Ex: 20/03/1985"
+                                        value={dataNascimento || ''}
+                                        onChange={e => setDataNascimento(e.target.value)}
+                                    >
+                                        {() => <input />}
+                                    </InputMask>
+                                </Form.Field>
 
                             </Form.Group>
 
                             <Form.Group>
 
-                                <Form.Input
-                                    fluid
-                                    label='Fone Celular'
-                                    width={8}
-                                    as={InputMask}
-                                    mask="(99) 99999-9999"
-                                    value={foneCelular}
-                                    onChange={e => setFoneCelular(e.target.value)}
-                                />
+                                <Form.Field width={8}>
+                                    <label>Fone Celular</label>
+                                    <InputMask
+                                        mask="(99) 99999-9999"
+                                        value={foneCelular || ''}
+                                        onChange={e => setFoneCelular(e.target.value)}
+                                    >
+                                        {() => <input />}
+                                    </InputMask>
+                                </Form.Field>
 
-                                <Form.Input
-                                    fluid
-                                    label='Fone Fixo'
-                                    width={8}
-                                    as={InputMask}
-                                    mask="(99) 9999-9999"
-                                    value={foneFixo}
-                                    onChange={e => setFoneFixo(e.target.value)}
-                                />
+                                <Form.Field width={8}>
+                                    <label>Fone Fixo</label>
+                                    <InputMask
+                                        mask="(99) 9999-9999"
+                                        value={foneFixo || ''}
+                                        onChange={e => setFoneFixo(e.target.value)}
+                                    >
+                                        {() => <input />}
+                                    </InputMask>
+                                </Form.Field>
 
                             </Form.Group>
 
