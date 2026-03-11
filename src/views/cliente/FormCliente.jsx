@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import InputMask from 'react-input-mask';
+import { useNavigate } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 
 
 export default function FormCliente () {
 
+    const navigate = useNavigate();
     const [nome, setNome] = useState();
    const [cpf, setCpf] = useState();
    const [dataNascimento, setDataNascimento] = useState();
@@ -120,6 +122,7 @@ export default function FormCliente () {
                                 icon
                                 labelPosition='left'
                                 color='orange'
+                                onClick={() => navigate('/')}
                             >
                                 <Icon name='reply' />
                                 Voltar
