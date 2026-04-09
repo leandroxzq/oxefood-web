@@ -36,6 +36,13 @@ export default function NavBar() {
                     name="Entregador"
                     active={location.pathname === '/entregador'}
                 />
+
+                <Menu.Item
+                    as={Link}
+                    to="/promocao"
+                    name="Promocao"
+                    active={location.pathname === '/promocao'}
+                />
             </Container>
         </Menu>
     )

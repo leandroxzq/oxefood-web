@@ -24,7 +24,7 @@ export default function FormCliente() {
             foneFixo: foneFixo,
         }
 
-        if (idCliente != null) {
+        if (idCliente !== null && idCliente !== undefined) {
             //Alteração:
             axios
                 .put(
@@ -60,7 +60,7 @@ export default function FormCliente() {
     }
 
     useEffect(() => {
-        if (state != null && state.id != null) {
+        if (state !== null && state.id !== null) {
             axios
                 .get('http://localhost:8080/api/cliente/' + state.id)
                 .then((response) => {
@@ -96,7 +96,7 @@ export default function FormCliente() {
                             Cadastro
                         </h2>
                     )}
-                    {idCliente != undefined && (
+                    {idCliente !== undefined && (
                         <h2>
                             {' '}
                             <span style={{ color: 'darkgray' }}>
