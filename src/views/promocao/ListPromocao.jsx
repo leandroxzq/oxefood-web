@@ -13,7 +13,6 @@ import {
 import MenuSistema from '../../MenuSistema'
 
 export default function ListPromocao() {
-
     const [lista, setLista] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [idRemover, setIdRemover] = useState()
@@ -46,10 +45,9 @@ export default function ListPromocao() {
     }, [])
 
     function carregarLista() {
-        axios.get('http://localhost:8080/api/promocao')
-            .then((response) => {
-                setLista(response.data)
-            })
+        axios.get('http://localhost:8080/api/promocao').then((response) => {
+            setLista(response.data)
+        })
     }
 
     async function remover() {
@@ -64,7 +62,6 @@ export default function ListPromocao() {
         setOpenModal(false)
     }
 
-  
     async function togglePromocao(promocao) {
         let request = {
             titulo: promocao.titulo,
@@ -87,13 +84,7 @@ export default function ListPromocao() {
 
     return (
         <div>
-
-         
-            <Modal
-                basic
-                onClose={() => setOpenModal(false)}
-                open={openModal}
-            >
+            <Modal basic onClose={() => setOpenModal(false)} open={openModal}>
                 <Header icon>
                     <Icon name="trash" />
                     <div style={{ marginTop: '5%' }}>
@@ -115,7 +106,6 @@ export default function ListPromocao() {
                 </Modal.Actions>
             </Modal>
 
-        
             <Modal
                 onClose={() => setOpenDetalhesModal(false)}
                 open={openDetalhesModal}
@@ -143,7 +133,6 @@ export default function ListPromocao() {
                     {promocaoSelecionada && (
                         <Table celled>
                             <Table.Body>
-
                                 <Table.Row>
                                     <Table.Cell width={4}>Título</Table.Cell>
                                     <Table.Cell>
@@ -154,14 +143,18 @@ export default function ListPromocao() {
                                 <Table.Row>
                                     <Table.Cell>Data Início</Table.Cell>
                                     <Table.Cell>
-                                        {formatarData(promocaoSelecionada.dataInicio)}
+                                        {formatarData(
+                                            promocaoSelecionada.dataInicio
+                                        )}
                                     </Table.Cell>
                                 </Table.Row>
 
                                 <Table.Row>
                                     <Table.Cell>Data Fim</Table.Cell>
                                     <Table.Cell>
-                                        {formatarData(promocaoSelecionada.dataFim)}
+                                        {formatarData(
+                                            promocaoSelecionada.dataFim
+                                        )}
                                     </Table.Cell>
                                 </Table.Row>
 
@@ -182,10 +175,11 @@ export default function ListPromocao() {
                                 <Table.Row>
                                     <Table.Cell>Promoção Válida</Table.Cell>
                                     <Table.Cell>
-                                        {promocaoSelecionada.promoValida ? 'Sim' : 'Não'}
+                                        {promocaoSelecionada.promoValida
+                                            ? 'Sim'
+                                            : 'Não'}
                                     </Table.Cell>
                                 </Table.Row>
-
                             </Table.Body>
                         </Table>
                     )}
@@ -218,9 +212,15 @@ export default function ListPromocao() {
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>Título</Table.HeaderCell>
-                                    <Table.HeaderCell>Data início</Table.HeaderCell>
-                                    <Table.HeaderCell>Data fim</Table.HeaderCell>
-                                    <Table.HeaderCell>Promoção valida</Table.HeaderCell>
+                                    <Table.HeaderCell>
+                                        Data início
+                                    </Table.HeaderCell>
+                                    <Table.HeaderCell>
+                                        Data fim
+                                    </Table.HeaderCell>
+                                    <Table.HeaderCell>
+                                        Promoção valida
+                                    </Table.HeaderCell>
 
                                     <Table.HeaderCell textAlign="center">
                                         Acoes
@@ -241,12 +241,12 @@ export default function ListPromocao() {
                                             {formatarData(promocao.dataFim)}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            {promocao.promoValida ? 'Sim' : 'Não'}
+                                            {promocao.promoValida
+                                                ? 'Sim'
+                                                : 'Não'}
                                         </Table.Cell>
 
                                         <Table.Cell textAlign="center">
-
-                                    
                                             <Button
                                                 inverted
                                                 circular
@@ -262,13 +262,14 @@ export default function ListPromocao() {
                                                 </Link>
                                             </Button>
 
-                                     
                                             <Button
                                                 inverted
                                                 circular
                                                 color="red"
                                                 icon
-                                                onClick={() => confirmaRemover(promocao.id)}
+                                                onClick={() =>
+                                                    confirmaRemover(promocao.id)
+                                                }
                                             >
                                                 <Icon name="trash" />
                                             </Button>
@@ -278,23 +279,29 @@ export default function ListPromocao() {
                                                 circular
                                                 color="blue"
                                                 icon
-                                                onClick={() => abrirDetalhes(promocao)}
+                                                onClick={() =>
+                                                    abrirDetalhes(promocao)
+                                                }
                                             >
                                                 <Icon name="eye" />
                                             </Button>
 
-                                    
                                             <Button
                                                 inverted
                                                 circular
-                                                color={promocao.promoValida ? 'yellow' : 'grey'}
+                                                color={
+                                                    promocao.promoValida
+                                                        ? 'yellow'
+                                                        : 'grey'
+                                                }
                                                 icon
-                                                onClick={() => togglePromocao(promocao)}
+                                                onClick={() =>
+                                                    togglePromocao(promocao)
+                                                }
                                                 title="Ativar/Desativar"
                                             >
                                                 <Icon name="power" />
                                             </Button>
-
                                         </Table.Cell>
                                     </Table.Row>
                                 ))}

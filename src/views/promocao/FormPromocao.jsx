@@ -78,7 +78,6 @@ export default function FormPromocao() {
             axios
                 .get('http://localhost:8080/api/promocao/' + state.id)
                 .then((response) => {
-
                     let p = response.data
 
                     setIdPromocao(p.id)
@@ -98,7 +97,6 @@ export default function FormPromocao() {
 
             <div style={{ marginTop: '3%' }}>
                 <Container textAlign="justified">
-
                     {idPromocao === undefined && (
                         <h2>
                             <span style={{ color: 'darkgray' }}>
@@ -123,7 +121,6 @@ export default function FormPromocao() {
 
                     <div style={{ marginTop: '4%' }}>
                         <Form>
-
                             <Form.Group widths="equal">
                                 <Form.Input
                                     required
@@ -145,7 +142,6 @@ export default function FormPromocao() {
                             </Form.Group>
 
                             <Form.Group>
-
                                 <Form.Input
                                     required
                                     fluid
@@ -190,7 +186,6 @@ export default function FormPromocao() {
                                         {() => <input />}
                                     </InputMask>
                                 </Form.Field>
-
                             </Form.Group>
                         </Form>
 

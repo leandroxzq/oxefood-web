@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Container, Menu } from 'semantic-ui-react'
+import { logout } from './views/util/AuthenticationService'
 
 export default function MenuSistema(props) {
     return (
@@ -40,6 +41,14 @@ export default function MenuSistema(props) {
                     active={props.tela === 'promocao'}
                     as={Link}
                     to="/list-promocao"
+                />
+
+                <Menu.Item
+                    className="navbar__item--mobile"
+                    onClick={logout}
+                    content="Sair"
+                    as={Link}
+                    to="/"
                 />
             </Container>
         </Menu>
