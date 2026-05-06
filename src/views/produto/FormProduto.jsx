@@ -20,6 +20,8 @@ export default function FormProduto() {
     const [valorUnitario, setValorUnitario] = useState()
     const [tempoEntregaMinimo, setTempoEntregaMinimo] = useState()
     const [tempoEntregaMaximo, setTempoEntregaMaximo] = useState()
+    const [idCategoria, setIdCategoria] = useState()
+    const [listaCategoriaProduto, setListaCategoriaProduto] = useState([])
 
     function salvar() {
         let produtoRequest = {
@@ -29,6 +31,7 @@ export default function FormProduto() {
             valorUnitario: valorUnitario,
             tempoEntregaMinimo: tempoEntregaMinimo,
             tempoEntregaMaximo: tempoEntregaMaximo,
+            idCategoria: idCategoria || null,
         }
 
         if (idProduto != null) {
@@ -56,6 +59,18 @@ export default function FormProduto() {
     }
 
     useEffect(() => {
+        axios
+            .get('http://localhost:8080/api/categoriaproduto')
+            .then((response) => {
+                const dropDownCategorias = []
+                dropDownCategorias.push({ text: '', value: '' })
+                response.data.forEach((c) =>
+                    dropDownCategorias.push({ text: c.descricao, value: c.id })
+                )
+
+                setListaCategoriaProduto(dropDownCategorias)
+            })
+
         if (state != null && state.id != null) {
             axios
                 .get('http://localhost:8080/api/produto/' + state.id)
@@ -67,6 +82,7 @@ export default function FormProduto() {
                     setValorUnitario(response.data.valorUnitario)
                     setTempoEntregaMinimo(response.data.tempoEntregaMinimo)
                     setTempoEntregaMaximo(response.data.tempoEntregaMaximo)
+                    setIdCategoria(response.data.categoria?.id || '')
                 })
         }
     }, [state])
@@ -129,6 +145,17 @@ export default function FormProduto() {
                                     value={valorUnitario}
                                     onChange={(e) =>
                                         setValorUnitario(e.target.value)
+                                    }
+                                />
+
+                                <Form.Select
+                                    required
+                                    fluid
+                                    label="Categoria"
+                                    options={listaCategoriaProduto}
+                                    value={idCategoria}
+                                    onChange={(e, { value }) =>
+                                        setIdCategoria(value)
                                     }
                                 />
                             </Form.Group>
